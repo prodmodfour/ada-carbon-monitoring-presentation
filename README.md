@@ -2,6 +2,8 @@
 
 Slidev presentation for the Ada Carbon Monitoring handover.
 
+**View the presentation:** https://prodmodfour.github.io/ada-carbon-monitoring-presentation/
+
 ## Running the Presentation
 
 ```bash

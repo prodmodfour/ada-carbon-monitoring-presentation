@@ -68,19 +68,7 @@ January 2026
 
 # Architecture Overview
 
-```
-ada-ui (Svelte)
-    |
-    v
-ada-api (FastAPI proxy)
-    |
-    v
-ada-carbon-monitoring-api (FastAPI)
-    |
-    +---> Prometheus (CPU metrics)
-    +---> MongoDB via ada-db-interface (workspace data)
-    +---> UK Carbon Intensity API (grid carbon)
-```
+<img src="/system.png" class="mx-auto" style="max-height: 420px;" />
 
 ---
 
@@ -167,7 +155,58 @@ Equivalencies
 
 ---
 
+# Carbon Intensity Forecast
+
+Shows 48-hour forecast from UK Carbon Intensity API with recommended low-carbon windows.
+
+<img src="/forecast.png" class="mx-auto" style="max-height: 380px;" />
+
+---
+
+# Usage Breakdown Chart
+
+Stacked bar chart showing idle vs busy electricity/carbon usage by day, month, or year.
+
+<img src="/usage_bar_chart.png" class="mx-auto" style="max-height: 380px;" />
+
+---
+
+# Carbon Heatmap
+
+GitHub-style year view showing daily carbon emissions intensity.
+
+<img src="/heatmap.png" class="mx-auto" style="max-height: 300px;" />
+
+---
+
+# Workspace Breakdown
+
+Per-workspace energy and carbon attribution.
+
+<img src="/workspace_breakdown.png" class="mx-auto" style="max-height: 350px;" />
+
+---
+
+# Carbon Equivalencies
+
+Real-world comparisons to make carbon footprint tangible.
+
+<img src="/carbon_equivalencies.png" class="mx-auto" style="max-height: 380px;" />
+
+---
+
+# Workspace Carbon Badge
+
+Carbon badge integrated into workspace cards for at-a-glance emissions.
+
+<img src="/workspaces.png" class="mx-auto" style="max-height: 420px;" />
+
+---
+
 # CarbonDashboard
+
+<div class="flex gap-4">
+<div class="flex-1">
 
 Located in Labs sidebar (ISIS, CLF platforms)
 
@@ -177,6 +216,14 @@ Features:
 - Stacked bar chart (day/month/year views)
 - Year heatmap
 - Workspace breakdown table
+
+</div>
+<div>
+<img src="/sidebar.png" style="height: 200px;" />
+</div>
+</div>
+
+<img src="/dashboard.png" class="mt-4" style="max-height: 180px;" />
 
 ---
 
