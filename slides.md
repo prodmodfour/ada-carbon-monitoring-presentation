@@ -183,7 +183,7 @@ Features:
 # User Attribution
 
 How it works:
-1. Get user's federal ID from auth
+1. Get user's federal ID 
 2. Query MongoDB for workspaces where owner matches
 3. Get hostnames from workspace data
 4. Query Prometheus for CPU metrics by hostname
@@ -198,8 +198,6 @@ Groups = cloud_project + machine_name
 
 Examples:
 - IDAaaS_Muon
-- CDAaaS_Laser
-- DDAaaS_Analysis
 
 API returns all workspaces in a group with combined carbon footprint.
 
@@ -277,18 +275,7 @@ use_fake_mongodb = true
 
 ---
 
-# E2E Tests
 
-21 Playwright tests covering:
-- Carbon badge on workspace cards
-- Carbon menu item in sidebar
-- Dashboard navigation and content
-- Cross-platform consistency
-- API error handling
-
-Run: `npx playwright test tests/ada-carbon.spec.js`
-
----
 
 # Documentation
 
@@ -296,10 +283,10 @@ Updated documentation at:
 `Ada_Carbon_Monitoring_Implementation_Documentation/`
 
 Key pages:
-- quickstart.md - Getting started
-- api_reference.md - All API endpoints
-- 2_backend.md - Backend architecture
-- 3_frontend.md - Svelte components
+- Quickstart - Getting started
+- API Reference - All API endpoints
+- Backend 
+- Frontend - Svelte components
 
 ---
 
@@ -346,25 +333,12 @@ groups:
 
 See `prometheus-preprod/prometheus/recording_rules.yml`
 
----
 
-# Summary
-
-What was delivered:
-- Complete carbon monitoring backend API
-- User and group attribution
-- 7 Svelte UI components
-- E2E test suite (21 tests)
-- Updated documentation
-- Demo mode for testing
-
-All code pushed to GitHub repositories.
 
 ---
 
-# Questions?
 
-Repositories:
+# Repositories
 - github.com/prodmodfour/ada-carbon-monitoring-api
 - github.com/prodmodfour/ada-api
 - github.com/ral-facilities/ada-ui
