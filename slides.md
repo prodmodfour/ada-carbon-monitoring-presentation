@@ -40,31 +40,13 @@ th, td {
 
 # Ada Carbon Monitoring
 
-Handover Presentation
+Handoff Presentation
 
-January 2026
-
----
-
-# Project Goal
-
-- Track carbon footprint of Ada workspaces
-- Attribute carbon usage to users and groups
-- Visualize carbon data in the Ada UI
-- Enable time-shifting to low-carbon periods
 
 ---
 
-# What Was Built
 
-- Backend API for carbon calculations
-- Prometheus integration for CPU metrics
-- UK Grid carbon intensity integration
-- User attribution via MongoDB workspace ownership
-- Group attribution via cloud project + machine type
-- Svelte UI components for visualization
 
----
 
 # Architecture Overview
 
@@ -72,16 +54,7 @@ January 2026
 
 ---
 
-# Repositories
 
-| Repository | Purpose |
-|------------|---------|
-| ada-carbon-monitoring-api | Carbon calculations, API |
-| ada-api | Proxy routes to carbon API |
-| ada-ui | Svelte frontend components |
-| ada-db-interface | MongoDB workspace queries |
-
----
 
 # Branch Structure
 
@@ -135,10 +108,6 @@ Equivalencies
 - `GET /users/me/usage` - User's workspace breakdown
 - `POST /workspaces/track` - Track workspaces for a user
 
-**Group Attribution:**
-- `GET /groups` - List all groups (cloud_project + machine)
-- `GET /groups/{name}/usage` - Group carbon usage
-- `GET /groups/{name}/summary` - Group summary
 
 ---
 
@@ -237,16 +206,6 @@ How it works:
 5. Calculate electricity and carbon
 6. Return aggregated results
 
----
-
-# Group Attribution
-
-Groups = cloud_project + machine_name
-
-Examples:
-- IDAaaS_Muon
-
-API returns all workspaces in a group with combined carbon footprint.
 
 ---
 
@@ -272,10 +231,6 @@ API returns all workspaces in a group with combined carbon footprint.
 File: `ada-carbon-monitoring-api.ini`
 
 ```ini
-[API]
-prometheus_url = https://host-172-16-100-248.nubes.stfc.ac.uk
-ada_db_interface_url = http://localhost:5002
-
 [POWER]
 busy_power_w = 12.0
 idle_power_w = 1.0
@@ -285,100 +240,6 @@ use_fake_prometheus = false
 use_fake_mongodb = false
 ```
 
----
-
-# Running the Services
-
-**ada-carbon-monitoring-api:**
-```bash
-cd ada-carbon-monitoring-api
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-**ada-api:**
-```bash
-cd ada-api
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 5001
-```
-
-Set `CARBON_API_URL=http://localhost:8000` in ada-api config.
-
----
-
-# Demo Mode
-
-To run with fake data:
-
-1. Switch to `carbon-labs-demo` branch in both repos
-2. Set in `ada-carbon-monitoring-api.ini`:
-```ini
-[FAKE_DATA]
-use_fake_prometheus = true
-use_fake_mongodb = true
-```
-3. UI shows orange "Demo Mode" banner
-
----
-
-
-
-# Documentation
-
-Updated documentation at:
-`Ada_Carbon_Monitoring_Implementation_Documentation/`
-
-Key pages:
-- Quickstart - Getting started
-- API Reference - All API endpoints
-- Backend 
-- Frontend - Svelte components
-
----
-
-# Key Files
-
-**ada-carbon-monitoring-api:**
-- `src/calculators/electricity_estimator.py`
-- `src/calculators/carbon_calculator.py`
-- `src/models/workspace_tracker.py`
-- `src/api/carbon/` - All route handlers
-
-**ada-ui:**
-- `src/components/Carbon/` - All Svelte components
-- `src/api/carbon.js` - API client
-
----
-
-# Next Steps
-
-For the Ada team:
-
-1. Review the carbon-labs-platform branches
-2. Merge into main when ready
-3. Deploy ada-carbon-monitoring-api to production
-4. Configure Prometheus recording rules for faster queries
-5. Consider adding more equivalencies or visualizations
-
----
-
-# Recording Rules
-
-For faster Prometheus queries, add recording rules:
-
-```yaml
-groups:
-  - name: carbon_aggregations
-    interval: 5m
-    rules:
-      - record: carbon:cpu_busy_seconds:by_project
-        expr: sum by (cloud_project_name) (
-          node_cpu_seconds_total{mode!="idle"}
-        )
-```
-
-See `prometheus-preprod/prometheus/recording_rules.yml`
 
 
 
@@ -388,5 +249,6 @@ See `prometheus-preprod/prometheus/recording_rules.yml`
 # Repositories
 - github.com/prodmodfour/ada-carbon-monitoring-api
 - github.com/prodmodfour/ada-api
+- https://github.com/prodmodfour/ada-db-interface
 - github.com/ral-facilities/ada-ui
 - github.com/prodmodfour/Ada_Carbon_Monitoring_Implementation_Documentation
